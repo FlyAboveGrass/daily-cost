@@ -1,27 +1,81 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
+<scroll-view class="scrollarea" scroll-y>
   <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
+    <picker mode="selector" range="{{categories}}" bindchange="onFilterChange">
+      <view class="filter-button">Filter by Category: {{filterCategory || 'All'}}</view>
+    </picker>
+    <view class="property-list">
+      <block wx:for="{{groupedProperties}}" wx:key="category">
+        <view class="category-header">{{item.category}}</view>
+        <block wx:for="{{item.properties}}" wx:key="id">
+          <view class="property-card {{item.category}}">
+            <view class="property-header">
+              <view class="name-icon-wrapper" bindtap="editProperty" data-index="{{index}}">
+                <text class="property-name">{{item.name}}</text>
+                <image class="clickable-icon" src="../../assets/images/arrow-right.png" />
+              </view>
+              <text class="average-cost">¥{{item.averageCost}}/day</text>
+            </view>
+            <view class="status-tag {{item.status}}">{{item.status}}</view>
+            <view class="property-details">
+              <view>
+                <label>Category:</label>
+                <text>{{item.category}}</text>
+              </view>
+              <view>
+                <label>Total Cost:</label>
+                <text>¥{{item.totalCost}}</text>
+              </view>
+              <view>
+                <label>Begin Date:</label>
+                <text>{{item.beginDate}}</text>
+              </view>
+              <view>
+                <label>Days Used:</label>
+                <text>{{item.daysUsed}} days</text>
+              </view>
+            </view>
+          </view>
+        </block>
       </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
-    </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
     </view>
   </view>
 </scroll-view>
+<view class="add-button" bindtap="showAddModal">+</view>
+<view class="overlay" hidden="{{!isAddModalVisible}}" bindtap="closeModal"></view>
+<view hidden="{{!isAddModalVisible}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">Add New Property</text>
+      <view class="close-button" bindtap="closeModal">×</view>
+    </view>
+    <form bindsubmit="addProperty">
+      <view class="modal-body">
+        <label>Name</label>
+        <input placeholder="Enter name" name="name" value="{{formData.name}}" />
+
+        <label>Total Cost (¥)</label>
+        <input placeholder="Enter total cost" name="totalCost" value="{{formData.totalCost}}" />
+
+        <label>Begin Date</label>
+        <picker mode="date" bindchange="onDateChange" value="{{beginDate}}">
+          <view class="picker">{{beginDate || 'Select date'}}</view>
+        </picker>
+
+        <label>Category</label>
+        <picker mode="selector" range="{{categories}}" bindchange="onCategoryChange" value="{{selectedCategory}}">
+          <view class="picker">{{categories[selectedCategory] || 'Select category'}}</view>
+        </picker>
+
+        <label>Status</label>
+        <picker mode="selector" range="{{statusOptions}}" bindchange="onStatusChange" value="{{selectedStatus}}">
+          <view class="picker">{{statusOptions[selectedStatus] || 'Select status'}}</view>
+        </picker>
+      </view>
+      <view class="modal-footer">
+        <button class="cancel-button" bindtap="closeModal">Cancel</button>
+        <button class="submit-button" formType="submit">Add Property</button>
+      </view>
+    </form>
+  </view>
+</view>

@@ -1,3 +1,5 @@
+@import '../../assets/style/variables.wxss';
+
 /**index.wxss**/
 page {
   height: 100vh;
@@ -59,4 +61,315 @@ page {
 
 .nickname-input {
   flex: 1;
+}
+
+
+.container {
+  padding: 16px;
+}
+
+.pie-charts {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.property-list {
+  width: 702rpx;
+  margin: 0 auto;
+}
+
+.category-header {
+  margin-bottom: 16rpx;
+}
+
+.property-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.property-card.Clothes {
+  background-color: #FFEBEE; /* Light red */
+}
+
+.property-card.Life {
+  background-color: #E8F5E9; /* Light green */
+}
+
+.property-card.Electronic {
+  background-color: #E3F2FD; /* Light blue */
+}
+
+.property-card.Application {
+  background-color: #F3E5F5; /* Light purple */
+}
+
+.property-card.Food {
+  background-color: #FFF3E0; /* Light orange */
+}
+
+.property-card.Work {
+  background-color: #E0F7FA; /* Light cyan */
+}
+
+.property-card.Toys {
+  background-color: #FCE4EC; /* Light pink */
+}
+
+.property-card.Tools {
+  background-color: #F1F8E9; /* Light lime */
+}
+
+.property-card.Others {
+  background-color: #ECEFF1; /* Light grey */
+}
+
+.property-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.name-icon-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.property-name {
+  font-size: 16px;
+  font-weight: bolder;
+  color: #333;
+  display: inline-block;
+}
+
+.clickable-icon {
+  width: 16px; /* Adjust size as needed */
+  height: 16px;
+  margin-left: 2px; /* Adjust space between name and icon */
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.average-cost {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FF5722;
+}
+
+.status-tag {
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  width: fit-content;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.status-tag::before {
+  content: '';
+  position: absolute;
+  top: -1rpx;
+  left: -1rpx;
+  right: -1rpx;
+  bottom: -1rpx;
+  border: 1rpx solid;
+  border-radius: 5px;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.status-tag.Unavailable {
+  background-color: #ffcdd2; /* Light Red */
+}
+
+.status-tag.Unavailable::before {
+  border-color: #e57373; /* Softer Red */
+}
+
+.status-tag.Using {
+  background-color: #4caf50; /* Bright Green */
+}
+
+.status-tag.Using::before {
+  border-color: #388e3c; /* Darker Green */
+}
+
+.status-tag.Retired {
+  background-color: #e0e0e0; /* Light Grey */
+}
+
+.status-tag.Retired::before {
+  border-color: #9e9e9e; /* Softer Grey */
+}
+
+.property-details {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+.property-details view {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.property-details label {
+  width: 120px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #313131;
+  color: #fff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #666;
+  margin-top: 40px;
+  font-size: 16px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  margin: 0 auto;
+  animation: popup 0.3s ease-out;
+  z-index: 1000;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.close-button {
+  background: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.modal-body label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-body input,
+.modal-body picker {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: #fff;
+  height: 44px;
+  line-height: 20px;
+}
+
+.modal-body input::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.cancel-button {
+  background-color: #ccc;
+  color: #333;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #313131;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
 }
