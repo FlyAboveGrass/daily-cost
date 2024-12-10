@@ -1,12 +1,27 @@
 <!--index.wxml-->
 <scroll-view class="scrollarea" scroll-y>
   <view class="container">
+    <view class="totals-card">
+      <view class="totals-row">
+        <view class="total-item">
+          <text class="total-label">Total:</text>
+          <text class="total-value special-font">¥{{totalCostSum}}<text class="total-count">（{{totalUsingCount}}件）</text></text>
+        </view>
+        <view class="total-item">
+          <text class="total-label">Avg:</text>
+          <text class="total-value special-font">¥{{totalAverageCostSum}}</text>
+        </view>
+      </view>
+    </view>
     <picker mode="selector" range="{{categories}}" bindchange="onFilterChange">
       <view class="filter-button">Filter by Category: {{filterCategory || 'All'}}</view>
     </picker>
     <view class="property-list">
       <block wx:for="{{groupedProperties}}" wx:key="category">
-        <view class="category-header">{{item.category}}</view>
+        <view class="category-header">
+          {{item.category}} 
+          <text class="category-details">({{item.usingCount}} in use, Total Avg Cost: ¥{{item.totalAverageCost}})</text>
+        </view>
         <block wx:for="{{item.properties}}" wx:key="id">
           <view class="property-card {{item.category}}">
             <view class="property-header">
@@ -18,10 +33,6 @@
             </view>
             <view class="status-tag {{item.status}}">{{item.status}}</view>
             <view class="property-details">
-              <view>
-                <label>Category:</label>
-                <text>{{item.category}}</text>
-              </view>
               <view>
                 <label>Total Cost:</label>
                 <text>¥{{item.totalCost}}</text>

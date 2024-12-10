@@ -12,6 +12,9 @@ Page({
     categories: ['Clothes', 'Life', 'Electronic', 'Application', 'Food', 'Work', 'Toys', 'Tools', 'Others'],
     selectedCategory: 8,
     filterCategory: '',
+    totalUsingCount: 0,
+    totalAverageCostSum: 0,
+    totalCostSum: 0,
   },
 
   onLoad() {
@@ -22,14 +25,46 @@ Page({
     const properties = wx.getStorageSync('properties') || [];
     this.setData({ properties });
     this.groupProperties(properties);
+    this.calculateTotals(properties);
   },
 
   groupProperties(properties) {
-    const grouped = this.data.categories.map(category => ({
-      category,
-      properties: properties.filter(property => property.category === category)
-    })).filter(group => group.properties.length > 0);
+    const grouped = this.data.categories.map(category => {
+      const categoryProperties = properties.filter(property => property.category === category);
+      const usingProperties = categoryProperties.filter(property => property.status === 'Using');
+      const totalAverageCost = usingProperties.reduce((sum, property) => {
+        const averageCost = this.calculateAverageCost(property.totalCost, property.beginDate);
+        return sum + parseFloat(averageCost);
+      }, 0);
+
+      return {
+        category,
+        properties: categoryProperties.map(property => ({
+          ...property,
+          daysUsed: this.calculateDaysUsed(property.beginDate),
+          averageCost: this.calculateAverageCost(property.totalCost, property.beginDate)
+        })),
+        usingCount: usingProperties.length,
+        totalAverageCost: totalAverageCost.toFixed(2)
+      };
+    }).filter(group => group.properties.length > 0);
+
     this.setData({ groupedProperties: grouped });
+  },
+
+  calculateTotals(properties) {
+    const totalUsingCount = properties.filter(property => property.status === 'Using').length;
+    const totalAverageCostSum = properties.reduce((sum, property) => {
+      const averageCost = this.calculateAverageCost(property.totalCost, property.beginDate);
+      return sum + parseFloat(averageCost);
+    }, 0);
+    const totalCostSum = properties.reduce((sum, property) => sum + parseFloat(property.totalCost), 0);
+
+    this.setData({
+      totalUsingCount,
+      totalAverageCostSum: totalAverageCostSum.toFixed(2),
+      totalCostSum: totalCostSum.toFixed(2)
+    });
   },
 
   filterProperties(category) {
@@ -109,7 +144,6 @@ Page({
       category: categories[selectedCategory],
       beginDate,
       status: statusOptions[selectedStatus],
-      daysUsed: this.calculateDaysUsed(beginDate),
       averageCost: this.calculateAverageCost(totalCost, beginDate),
       createdAt: editingIndex !== undefined ? this.data.properties[editingIndex].createdAt : currentTime, // Use existing or new timestamp
       updatedAt: currentTime // Always update the timestamp
@@ -149,7 +183,8 @@ Page({
   calculateDaysUsed(beginDate) {
     const startDate = new Date(beginDate);
     const currentDate = new Date();
-    return Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+    const daysUsed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+    return daysUsed > 0 ? daysUsed : 1; // Ensure at least 1 day is counted
   },
 
   calculateAverageCost(totalCost, beginDate) {
