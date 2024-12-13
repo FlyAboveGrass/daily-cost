@@ -103,39 +103,39 @@ page {
 }
 
 .property-card.Clothes {
-  background-color: #FFEBEE; /* Light red */
+  background-color: #fff1f0; /* Ant Design Red-1 */
 }
 
 .property-card.Life {
-  background-color: #E8F5E9; /* Light green */
+  background-color: #f6ffed; /* Ant Design Green-1 */
 }
 
 .property-card.Electronic {
-  background-color: #E3F2FD; /* Light blue */
+  background-color: #e6f7ff; /* Ant Design Blue-1 */
 }
 
 .property-card.Application {
-  background-color: #F3E5F5; /* Light purple */
+  background-color: #f9f0ff; /* Ant Design Purple-1 */
 }
 
 .property-card.Food {
-  background-color: #FFF3E0; /* Light orange */
+  background-color: #fff7e6; /* Ant Design Orange-1 */
 }
 
 .property-card.Work {
-  background-color: #E0F7FA; /* Light cyan */
+  background-color: #e6fffb; /* Ant Design Cyan-1 */
 }
 
 .property-card.Toys {
-  background-color: #FCE4EC; /* Light pink */
+  background-color: #fff0f6; /* Ant Design Pink-1 */
 }
 
 .property-card.Tools {
-  background-color: #F1F8E9; /* Light lime */
+  background-color: #fcffe6; /* Ant Design Lime-1 */
 }
 
 .property-card.Others {
-  background-color: #ECEFF1; /* Light grey */
+  background-color: #f0f5ff; /* Ant Design Blue-1 */
 }
 
 .property-header {
@@ -197,27 +197,27 @@ page {
 }
 
 .status-tag.Unavailable {
-  background-color: #ffcdd2; /* Light Red */
+  background-color: #ffccc7; /* Ant Design Red-3 */
 }
 
 .status-tag.Unavailable::before {
-  border-color: #e57373; /* Softer Red */
+  border-color: #ff4d4f; /* Ant Design Red-6 */
 }
 
 .status-tag.Using {
-  background-color: #4caf50; /* Bright Green */
+  background-color: #b7eb8f; /* Ant Design Green-3 */
 }
 
 .status-tag.Using::before {
-  border-color: #388e3c; /* Darker Green */
+  border-color: #52c41a; /* Ant Design Green-6 */
 }
 
 .status-tag.Retired {
-  background-color: #e0e0e0; /* Light Grey */
+  background-color: #d9d9d9; /* Ant Design Grey-4 */
 }
 
 .status-tag.Retired::before {
-  border-color: #9e9e9e; /* Softer Grey */
+  border-color: #8c8c8c; /* Ant Design Grey-5 */
 }
 
 .property-details {
@@ -242,7 +242,7 @@ page {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #313131;
+  background-color: #1890ff; /* Ant Design Blue-6 */
   color: #fff;
   border-radius: 50%;
   width: 50px;
@@ -290,7 +290,7 @@ page {
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #ffffff; /* Pure white for a clean look */
   border-radius: 10px;
   padding: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -324,6 +324,7 @@ page {
   font-size: 24px;
   cursor: pointer;
   padding: 5px;
+  color: #1890ff; /* Ant Design Blue-6 */
 }
 
 .modal-body {
@@ -388,7 +389,7 @@ page {
   flex-direction: column;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #a7ffeb; /* Brighter color */
+  background-color: #f0f5ff; /* Ant Design Blue-1 */
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -414,13 +415,13 @@ page {
 
 .total-label {
   font-size: 14px;
-  color: #444; /* Darker color for better contrast */
+  color: #595959; /* Ant Design Grey-6 */
 }
 
 .total-value {
   font-size: 20px; /* Slightly larger for emphasis */
   font-weight: bold;
-  color: #222; /* Darker color for better contrast */
+  color: #262626; /* Ant Design Grey-8 */
 }
 
 .special-font {
@@ -429,5 +430,5 @@ page {
 
 .total-count {
   font-size: 12px; /* Smaller font size */
-  color: #888; /* Lighter color for less emphasis */
+  color: #8c8c8c; /* Ant Design Grey-5 */
 }
